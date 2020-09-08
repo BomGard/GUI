@@ -4,6 +4,7 @@ import json
 
 # address = 'Москва г.,Алабяна ул., д.10/1'
 
+# получение коордита по адресу. На вход: адрес
 def getcoordinates(address):
     if address:
         key = 'd02c5ac9-442e-43a3-8f34-4b641f189db6'
