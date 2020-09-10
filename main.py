@@ -2,8 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter.filedialog import askopenfilename
 import pandas as pd
-import numpy as np
-from openpyxl.utils.dataframe import dataframe_to_rows
+
 import geo
 
 root = Tk()
@@ -13,12 +12,13 @@ def get_coordinates():
     coord = geo.getcoordinates(data.get())
     if coord:
         text_result.insert(0.0, coord + '\n')
-        # messagebox.showinfo('Coordinates', coord)
+
     else:
         messagebox.showerror('Борода', 'Введите адресс')
 
 
 def get_coordinates_form_exel():
+
     # Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
     try:
         text_result.insert(0.0, 'Вычисляем координаты...' + '\n')
@@ -28,8 +28,8 @@ def get_coordinates_form_exel():
         mat = geo.getcoordinates_from_excel(array)
         data['Pos'] = mat
         data.to_excel(filename, index=False)
-    except Exception:
-        messagebox.showerror('Борода', 'Что-то пошло не так')
+    except Exception as ex:
+        messagebox.showerror('Борода', 'Что-то пошло не так {}'.format(ex))
     else:
         messagebox.showinfo('Result', "Координаты записали в тот же файл, можно смотерть")
     pass
